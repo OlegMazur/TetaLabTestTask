@@ -1,25 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Calendar from './Calendar/Calendar';
 import styles from'./App.module.scss';
-
+import LoginPage from './LoginPage/LoginPage';
+//const {user}= {user: {name:'Oleg', email:'mazuroleg75@gmail.com' }};
+const user=false;
 function App() {
-  // const getScreen = path => {
-  //   switch (path) {
-  //     case AppRoute.LOGIN: {
-  //       return <LoginForm onLogin={handleLogin} />;
-  //     }
-  //     case AppRoute.REGISTRATION: {
-  //       return <RegistrationForm onRegister={handleRegister} />;
-  //     }
-  //     default: {
-  //       return null;
-  //     }
-  //   }
-  // };
+  const [isAuth,setIsAuth]=useState(false)
+  
   return (
     <div className={styles.App}>
       <main>
-        <Calendar />
+        {isAuth
+        ?<Calendar />
+        :<LoginPage user={user}/>}
+       
       </main>
     </div>
   );

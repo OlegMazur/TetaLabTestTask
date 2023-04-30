@@ -1,0 +1,182 @@
+.loginWraper {
+  position: relative;
+  width: 1280px;
+  height: 832px;
+  background: #ffffff;
+}
+.imgBlock {
+  position: absolute;
+  width: 552.5px;
+  height: 832px;
+  left: 727.09px;
+  top: 0px;
+}
+.loginBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0px;
+  gap: 80px;
+
+  position: absolute;
+  width: 475px;
+  height: 419px;
+  left: 82px;
+  top: 187px;
+}
+.loginTitle {
+  width: 201px;
+  height: 34px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 34px;
+  /* identical to box height */
+  color: #3d3d3d;
+  position: relative;
+  img {
+    position: relative;
+    left: 0px;
+    top: 5px;
+  }
+}
+.formBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 20px;
+  width: 475px;
+  height: 305px;
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 305px;
+    .inputBlock {
+      height: 169px;
+      .input {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 16px;
+        gap: 10px;
+        width: 475px;
+        height: 56px;
+        border: 1px solid #3d3d3d;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        input {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 0px;
+          gap: 345px;
+
+          width: 443px;
+          height: 24px;
+          position: relative;
+          border: none;
+          &:focus{
+            outline-style: none;
+            box-shadow: none;
+          }
+          .faEye {
+            position: absolute;
+            top: 17px;
+            right: 17px;
+          }
+        }
+      }
+      .inputFuter {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+
+        padding: 0px;
+        gap: 202px;
+        width: 475px;
+        height: 17px;
+        div {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          width: 150px;
+          height: 17px;
+          &:hover {
+            cursor: pointer;
+          }
+          label {
+            width: 123px;
+            height: 17px;
+
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            /* identical to box height */
+
+            color: #3d3d3d;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+          input {
+            margin-right: 5px;
+            height: 17px;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+        button {
+          width: 123px;
+          height: 17px;
+          font-family: "Inter";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 17px;
+          /* identical to box height */
+          color: #ffc010;
+          padding: 0px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .logInBtn {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 207px;
+      gap: 10px;
+      width: 474px;
+      height: 56px;
+      background: #ffc010;
+      border-radius: 16px;
+      span {
+        width: 60px;
+        height: 19px;
+        background-color: inherit;
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+
+        color: #ffffff;
+        display: flex;
+        flex-wrap: nowrap;
+      }
+      &:hover {
+        opacity: 90%;
+      }
+    }
+  }
+}
