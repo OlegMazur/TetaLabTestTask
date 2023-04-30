@@ -5,9 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './LoginPage.module.scss'
 function LoginPage(user) {
-    const { handleSubmit, register } = useForm();
+    //const { handleSubmit, register } = useForm();
     const [isPassword, setIsPassword] = useState(true);
-    const onSubmit = data => console.log(data);
+    const [password, setPassword] = useState('');
+    const [login, setLogin] = useState('');
+    const onSubmit = () =>{ 
+        
+        console.log('data')};
     // const handleLogin = (event) => {
     //     console.log('login')
     // }
@@ -20,19 +24,17 @@ function LoginPage(user) {
 
                 </div>
                 <div className={styles.formBlock}>
-                    <form name="loginForm" onSubmit={handleSubmit(onSubmit)}>
+                    <form name="loginForm" >
                         <div className={styles.inputBlock}>
                             <div className={styles.input} >
-
-
-
                                 <input
-                                    {...register("login", { required: true, maxLength: 20 })}
+                                    type='text'
+                                    value={login}
+                                    onChange={(e) => setLogin(e.target.value)}
+                                // {...register("login", { required: true, maxLength: 20 })}
 
 
                                 />
-
-
                             </div>
                             <div className={styles.input}>
                                 {/* <input
@@ -41,10 +43,13 @@ function LoginPage(user) {
                                 /> */}
                                 <input
                                     name="password"
+                                    value={password}
                                     type={isPassword ? 'password' : 'text'}
-                                    {...register("password", { required: true, maxLength: 20 })}
+
+                                    onChange={(e) => setPassword(e.target.value)}
+                                //{...register("password", { required: true, maxLength: 20 })}
                                 />
-                                <button onClick={()=>setIsPassword(prev=>!prev)}>
+                                <button onClick={() => setIsPassword(prev => !prev)}>
                                     <FontAwesomeIcon icon={faEye}
                                         size={'xl'}
                                         className={styles.faEye} />
@@ -60,7 +65,7 @@ function LoginPage(user) {
 
                         </div>
 
-                        <button type="submit" className={styles.logInBtn}><span>Log In</span></button>
+                        <button type="submit" onClick={onSubmit} className={styles.logInBtn}><span>Log In</span></button>
 
                     </form>
                 </div>

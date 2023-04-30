@@ -20,26 +20,20 @@ const eventsCategory = {
   STUDY: 'study',
   RELAX: 'relax'
 }
-const events = [
-  { id: 1, category: 'sports', description: 'Yoga in park', date: '2023-04-28T00:00:00+03:00' },
-  { id: 2, category: 'family', description: 'Dinner with family', date: '2023-04-18T00:00:00+03:00' },
-  { id: 3, category: 'work', description: 'Meeting with teem', date: '2023-04-13T00:00:00+03:00' },
-  { id: 4, category: 'study', description: 'All day conference dddddd ddddd', date: '2023-04-11T00:00:00+03:00' },
-  { id: 5, category: 'relax', description: 'Birthday party', date: '2023-04-07T00:00:00+03:00' },
-  { id: 6, category: 'study', description: 'Marketing events', date: '2023-03-22T00:00:00+02:00' },
-]
+
 const filterEvents = (arr, date) => {
   const actualMonth = date.format('YYYYMM');
   return arr.filter((item) => moment(item.date).format('YYYYMM') === actualMonth)
 }
-function Calendar() {
+function Calendar({ selectedDate, setSelectedDate, date, setIsModalVisible, events }) {
   //moment.updateLocale('en', { week: { dow: 1 } });
-  const [selectedDate, setSelectedDate] = useState(moment())
-  const [date, setDate] = useState(moment());
+
+
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const startDay = selectedDate.clone().startOf('month').startOf('week');
   let day = startDay.clone();
   const filterEventsArr = filterEvents(events, selectedDate);
+
   const daysArray = [...new Array(42)].map((itemDay) => {
     const dayObj = {}
     const actualDay = day.format('DD');
@@ -47,11 +41,12 @@ function Calendar() {
     if (findedEvent) (
       dayObj.event = findedEvent
     )
-    dayObj.date = day.add(1, 'day').clone()
+    dayObj.date = day.clone();
+    day.add(1, 'day')
     return dayObj
   });
   const weekDaysArr = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const monthHandler = ( string) => {
+  const monthHandler = (string) => {
     if (string === Constant.PlUS) {
       setSelectedDate((prev) => prev.clone().add(1, 'month'));
     }
@@ -62,8 +57,8 @@ function Calendar() {
       });
     };
   }
-  const monthMenuHandler=(event)=>{
-    setSelectedDate(prev=>prev.clone().month(event.target.innerText))
+  const monthMenuHandler = (event) => {
+    setSelectedDate(prev => prev.clone().month(event.target.innerText))
   }
   const selectedDateHandler = (day) => {
     setSelectedDate(day)
@@ -73,7 +68,7 @@ function Calendar() {
   }
   const monthArr = [...new Array(12)].map((item, index) => moment().month(index).format('MMMM'));
   const isToday = () => Boolean(date.format('YYYYMMDD') === selectedDate.format('YYYYMMDD'))
-  
+
   return (
     <div className={styles.calendar}>
       <header className={styles.header}>
@@ -106,14 +101,15 @@ function Calendar() {
               {isMenuVisible && (
                 <div className={styles.monthMenuWrapper}>
                   {monthArr.map((item, index) => (
-                    <div key={index} 
-                    className={styles.monthMenuItem}
-                    onClick={monthMenuHandler}>{item} </div>))}
+                    <div key={index}
+                      className={styles.monthMenuItem}
+                      onClick={monthMenuHandler}>{item} </div>))}
                 </div>
               )}
-              </div>
+            </div>
           </div>
-          <button className={styles.eventBlock}>
+          <button className={styles.eventBlock}
+            onClick={() => setIsModalVisible(prev => !prev)}>
             <div className={styles.eventIcon}>
               <FontAwesomeIcon
                 icon={faPlus}
@@ -133,7 +129,7 @@ function Calendar() {
         )))}
       </div>
       <div className={styles.daysGrid}>{daysArray.map(({ date: day, event }) => (
-        <div key={day.format('DDMMYYYY')}
+        <div key={day.unix()}
           className={styles.dayItem}
           onClick={() => selectedDateHandler(day)} >
           <div className={clsx(

@@ -1,0 +1,194 @@
+.modalWrapper {
+  position: absolute;
+  width: 1280px;
+  height: 832px;
+  left: 0px;
+  top: 0px;
+
+  background: rgba(233, 229, 217, 0.25);
+  backdrop-filter: blur(4px);
+}
+.modalWindow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 40px;
+  gap: 50px;
+
+  position: absolute;
+  width: 555px;
+  height: 469px;
+  left: 650px;
+  top: 45px;
+
+  background: #ffffff;
+  border-radius: 16px;
+
+  .inputBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 50px;
+
+    width: 475px;
+    height: 283px;
+    .title {
+      width: 121px;
+      height: 17px;
+
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 30px;
+    }
+    .inputs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 30px;
+      position: relative;
+      width: 475px;
+      height: 216px;
+      // .categoryMenu{
+      //     display: flex;
+      //     flex-direction:column;
+      //     position: absolute;
+      //     background-color: #FFFFFF;
+      //     color: #3d3d3d;
+      //     width: 200px;
+      //     height: 200px;
+      //     div{
+      //         &:hover{
+      //             opacity: 90%;
+      //         }
+      //     }
+      // }
+      .message {
+        color: coral;
+        position: absolute;
+        top: 100px;
+        left: 0px;
+        border: none;
+      }
+      div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 19px 16px;
+        gap: 10px;
+
+        width: 475px;
+        height: 52px;
+
+        border: 1px solid #e9e5d9;
+        border-radius: 16px;
+
+        input {
+          height: 17px;
+          width: 100%;
+          font-family: "Inter";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 17px;
+          /* identical to box height */
+
+          color: #3d3d3d;
+          border: none;
+        }
+      }
+      .inputDateWrapper {
+        display: flex;
+        justify-content: space-between;
+        div {
+          padding-left: 0px;
+        }
+        .inputDateBlock {
+          display: flex;
+          justify-content: flex-end;
+          position: relative;
+          .faCalendar {
+            position: absolute;
+            right: 14px;
+            top: 14px;
+          }
+          input {
+            z-index: 2;
+            opacity: 0%;
+          }
+        }
+      }
+      .categoryBtnBlock {
+        position: relative;
+        .categoryMenu {
+          display: flex;
+          flex-direction: column;
+          color: #3d3d3d;
+
+         
+          width: 150px;
+          height: 100%;
+          position: absolute;
+          top: 40px;
+          left: 100px;
+
+          .categoryMenuItem {
+            height: 26px;
+            width: 150px;
+            background-color: #f5ebd1;
+            &:hover {
+              background-color: #ffc010;
+            }
+          }
+        }
+      }
+    }
+  }
+  .btnBlock {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    .btnCancel {
+      display: flex;
+      width: 55px;
+      height: 29px;
+      align-items: center;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 19px;
+    }
+    .btnSave {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 12px;
+      gap: 10px;
+
+      width: 148px;
+      height: 56px;
+
+      background: #ffc010;
+      border-radius: 16px;
+      margin-left: 10px;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 19px;
+
+      color: #ffffff;
+    }
+  }
+}
+input:focus {
+  outline-style: none;
+  box-shadow: none;
+}
