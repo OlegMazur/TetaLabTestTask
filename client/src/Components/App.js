@@ -43,16 +43,19 @@ function App() {
     }
   }
   const onSubmitNewEventData = () => {
-    const id=events.length;
+    const id = events.length;
 
-    const eventData = { 
-            id,
-            category:newEventCategory,
-            description:newEventDescription,
-            date:selectedDate.format()
-         }
-         setNewEventData(prev=>[...prev, eventData])
+    const eventData = {
+      id,
+      category: newEventCategory,
+      description: newEventDescription,
+      date: selectedDate.format()
+    }
+    setNewEventData(prev => [...prev, eventData])
     // events.push(eventData)
+    setIsModalVisible(prev => !prev);
+    setNewEventDescription('');
+    setNewEventCategory('');
     console.log(newEventData)
   }
   console.log(newEventDescription)
@@ -80,7 +83,7 @@ function App() {
           newEventDescription={newEventDescription}
           setNewEventDescription={setNewEventDescription}
           onSubmitNewEventData={onSubmitNewEventData}
-           />
+        />
         }
 
       </main>

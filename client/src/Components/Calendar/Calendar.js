@@ -36,8 +36,8 @@ function Calendar({ selectedDate, setSelectedDate, date, setIsModalVisible, even
 
   const daysArray = [...new Array(42)].map((itemDay) => {
     const dayObj = {}
-    const actualDay = day.format('DD');
-    const findedEvent = filterEventsArr.find(item => moment(item.date).format('DD') === actualDay)
+    const actualDay = day.format('DDMMMM');
+    const findedEvent = filterEventsArr.find(item => moment(item.date).format('DDMMMM') === actualDay)
     if (findedEvent) (
       dayObj.event = findedEvent
     )
