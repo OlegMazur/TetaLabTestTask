@@ -48,6 +48,7 @@ Clone project`s repo:
 git clone https://github.com/OlegMazur/TetaLabTestTask.git
 or download ZIP archive
 
+Open root folder of the ptoject in your IDE or command line
 
 Backend
 In the command line (terminal) go to the folder server:
