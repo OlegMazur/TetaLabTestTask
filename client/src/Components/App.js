@@ -13,15 +13,6 @@ const eventsCategory = {
   STUDY: 'study',
   RELAX: 'relax'
 }
-const events = [
-  { id: 0, category: 'sports', description: 'Yoga in park', date: '2023-03-28T00:00:00+03:00' },
-  { id: 1, category: 'sports', description: 'Yoga in park', date: '2023-04-28T00:00:00+03:00' },
-  { id: 2, category: 'family', description: 'Dinner with family', date: '2023-04-18T00:00:00+03:00' },
-  { id: 3, category: 'work', description: 'Meeting with teem', date: '2023-04-13T00:00:00+03:00' },
-  { id: 4, category: 'study', description: 'All day conference dddddd ddddd', date: '2023-04-11T00:00:00+03:00' },
-  { id: 5, category: 'relax', description: 'Birthday party', date: '2023-04-07T00:00:00+03:00' },
-  { id: 6, category: 'study', description: 'Marketing events', date: '2023-03-22T00:00:00+02:00' },
-]
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -30,7 +21,7 @@ function App() {
   const [selectedDate, setSelectedDate] = useState(moment())
   const [date, setDate] = useState(moment());
   const [addEventError, setAddEventError] = useState('');
-  const [newEventData, setNewEventData] = useState(events);
+  const [newEventData, setNewEventData] = useState({});
   const [newEventDescription, setNewEventDescription] = useState('');
   const [newEventCategory, setNewEventCategory] = useState('');
   const [loginData, setLoginData] = useState({ login: '', password: '' })
@@ -52,18 +43,26 @@ function App() {
     }
   }
   const onSubmitNewEventData = () => {
-    const id = events.length;
-
-    const eventData = {
-      id,
-      category: newEventCategory,
-      description: newEventDescription,
-      date: selectedDate.format()
-    }
-    setNewEventData(prev => [...prev, eventData])
-    setIsModalVisible(prev => !prev);
-    setNewEventDescription('');
-    setNewEventCategory('');
+    fetch('http://localhost:5000/api/events/event', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({
+        category: newEventCategory,
+        description: newEventDescription,
+        date: selectedDate
+      })
+    }).then(response => {
+      if (response.status !== 200) {
+        throw new Error('event was not created')
+      }
+      return response.json()
+    }).then(() => {
+      getEvents()
+      setNewEventDescription('')
+    })
+      .catch(alert)
   }
 
   const loginSubmit = () => {
@@ -83,13 +82,20 @@ function App() {
     })
       .catch(alert)
   }
-
+  
+  function getEvents() {
+    fetch('http://localhost:5000/api/events/')
+      .then(res => res.json())
+      .then(data => setNewEventData(prev => data))
+  }
   useEffect(() => {
     if (token) {
       setIsAuth(true)
     }
   }, [token])
-  
+  useEffect(() => {
+    getEvents()
+  }, [])
   return (
     <div className={styles.App}>
       <main>

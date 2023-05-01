@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+
 import styles from './AddEventPage.module.scss'
+
 function AddEventPage({ 
     onSubmitNewEventData,
     todayDate,
@@ -13,12 +15,11 @@ function AddEventPage({
     newEventHahdler, addEventError, setIsModalVisible, eventsCategory }) {
     const [newEventDate, setNewEventDate] = useState(null);
     const [isVisibleCategoryMenu, setIsVisibleCategoryMenu] = useState(false);
-    console.log(newEventDate)
+    
     const categoryArr = [...Object.values(eventsCategory)]
     return (
         <div className={styles.modalWrapper}>
             <div className={styles.modalWindow}>
-
                 <div className={styles.inputBlock}>
                     <div className={styles.title}>
                         Add Event
@@ -29,7 +30,6 @@ function AddEventPage({
                             <input type='button'
                                 value='Change event category'
                             />
-
                             {isVisibleCategoryMenu &&
                                 <div className={styles.categoryMenu}>
                                     {categoryArr.map((item, index) => <div
@@ -41,7 +41,6 @@ function AddEventPage({
                         </div>
                         <div className={styles.inputDateWrapper}>
                             <div>
-                                {/* <input type='text' value={selectedDate} /> */}
                                 {selectedDate}
                             </div>
                             <div className={styles.inputDateBlock}>
