@@ -38,3 +38,6 @@ const Event = sequelize.define('Event', {
 });
 User.hasMany(Event)
 Event.belongsTo(User)
+module.exports={
+  User, Event
+}

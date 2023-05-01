@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Calendar from './Calendar/Calendar';
-import styles from './App.module.scss';
 import LoginPage from './LoginPage/LoginPage';
 import AddEventPage from './ModalPage/AddEventPage';
 import moment from 'moment/moment';
-//const {user}= {user: {name:'Oleg', email:'mazuroleg75@gmail.com' }};
-const user = false;
+
+import styles from './App.module.scss';
+
 const eventsCategory = {
   SPORT: 'sports',
   FAMILY: 'family',
@@ -22,8 +22,10 @@ const events = [
   { id: 5, category: 'relax', description: 'Birthday party', date: '2023-04-07T00:00:00+03:00' },
   { id: 6, category: 'study', description: 'Marketing events', date: '2023-03-22T00:00:00+02:00' },
 ]
+
 function App() {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
+  const [token, setToken] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [selectedDate, setSelectedDate] = useState(moment())
   const [date, setDate] = useState(moment());
@@ -31,15 +33,22 @@ function App() {
   const [newEventData, setNewEventData] = useState(events);
   const [newEventDescription, setNewEventDescription] = useState('');
   const [newEventCategory, setNewEventCategory] = useState('');
+  const [loginData, setLoginData] = useState({ login: '', password: '' })
+
+  const loginHandler = (event) => {
+    setLoginData((prev) => {
+      const prevData = { ...prev }
+      prevData[event.target.name] = event.target.value
+      return prevData
+    })
+  }
   const newEventHahdler = (event) => {
     if (moment(event.target.value) < date) {
       setAddEventError('Дата повинна бути в майбутньому')
-      console.log('error')
     }
     if (moment(event.target.value) > date) {
       setAddEventError('');
       setSelectedDate(prev => prev = moment(event.target.value));
-      console.log('error')
     }
   }
   const onSubmitNewEventData = () => {
@@ -52,13 +61,35 @@ function App() {
       date: selectedDate.format()
     }
     setNewEventData(prev => [...prev, eventData])
-    // events.push(eventData)
     setIsModalVisible(prev => !prev);
     setNewEventDescription('');
     setNewEventCategory('');
-    console.log(newEventData)
   }
-  console.log(newEventDescription)
+
+  const loginSubmit = () => {
+    fetch('http://localhost:5000/api/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(loginData)
+    }).then(response => {
+      if (response.status !== 200) {
+        throw new Error('authorization error')
+      }
+      return response.json()
+    }).then(data => {
+      setToken(data)
+    })
+      .catch(alert)
+  }
+
+  useEffect(() => {
+    if (token) {
+      setIsAuth(true)
+    }
+  }, [token])
+  
   return (
     <div className={styles.App}>
       <main>
@@ -69,7 +100,11 @@ function App() {
             date={date}
             setSelectedDate={setSelectedDate}
             setIsModalVisible={setIsModalVisible} />
-          : <LoginPage user={user} />
+          : <LoginPage
+            loginHandler={loginHandler}
+            loginData={loginData}
+            loginSubmit={loginSubmit}
+          />
         }
         {isModalVisible && <AddEventPage
           newEventCategory={newEventCategory}
