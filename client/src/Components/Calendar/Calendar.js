@@ -1,39 +1,22 @@
 import React, { useState } from 'react';
 import moment from 'moment/moment';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import styles from './Calendar.module.scss'
 import { faChevronDown, faChevronLeft, faChevronRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
-const IconSize = {
-  LARGE: 'lg',
-  XLARGE: 'xl'
-};
-const Constant = {
-  PlUS: '+',
-  MINUS: '-'
-};
-const eventsCategory = {
-  SPORT: 'sports',
-  FAMILY: 'family',
-  WORK: 'work',
-  STUDY: 'study',
-  RELAX: 'relax'
-}
+
+import styles from './Calendar.module.scss'
+import { Constant, eventsCategory, IconSize } from '../Constants/Constants';
+
 
 const filterEvents = (arr, date) => {
   const actualMonth = date.format('YYYYMM');
   return arr.filter((item) => moment(item.date).format('YYYYMM') === actualMonth)
 }
 function Calendar({ selectedDate, setSelectedDate, date, setIsModalVisible, events }) {
-  //moment.updateLocale('en', { week: { dow: 1 } });
-
-
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const startDay = selectedDate.clone().startOf('month').startOf('week');
   let day = startDay.clone();
   const filterEventsArr = filterEvents(events, selectedDate);
-
   const daysArray = [...new Array(42)].map((itemDay) => {
     const dayObj = {}
     const actualDay = day.format('DDMMMM');

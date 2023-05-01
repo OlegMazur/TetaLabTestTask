@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const sequelize = require('./db')
-const { User,Event } = require('./models/models')
+const { User, Event } = require('./models/models')
 const cors = require('cors')
 const router = require('./routers/index')
 const PORT = process.env.PORT || 5000;
@@ -28,8 +28,8 @@ const start = async () => {
     const userPassword = '123456'
     const hashPassword = await bcrypt.hash(userPassword, 5)
     await User.create({ login: "Oleg", password: hashPassword })
-    events.forEach( async (item) => {
-       await Event.create({ category: item.category, description: item.description, date: item.date})
+    events.forEach(async (item) => {
+      await Event.create({ category: item.category, description: item.description, date: item.date })
     })
 
   } catch (e) {

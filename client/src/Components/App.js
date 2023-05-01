@@ -5,14 +5,7 @@ import AddEventPage from './ModalPage/AddEventPage';
 import moment from 'moment/moment';
 
 import styles from './App.module.scss';
-
-const eventsCategory = {
-  SPORT: 'sports',
-  FAMILY: 'family',
-  WORK: 'work',
-  STUDY: 'study',
-  RELAX: 'relax'
-}
+import { eventsCategory } from './Constants/Constants';
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -61,6 +54,7 @@ function App() {
     }).then(() => {
       getEvents()
       setNewEventDescription('')
+      alert('event was created')
     })
       .catch(alert)
   }
@@ -82,7 +76,7 @@ function App() {
     })
       .catch(alert)
   }
-  
+
   function getEvents() {
     fetch('http://localhost:5000/api/events/')
       .then(res => res.json())
@@ -119,7 +113,7 @@ function App() {
           setIsModalVisible={setIsModalVisible}
           setNewEventCategory={setNewEventCategory}
           selectedDate={moment(selectedDate).format('DD.MM.YYYY')}
-          todayDate={moment(date).format('DDMMYYYY')}
+          todayDate={moment(date).format('YYYY-MM-DD')}
           eventsCategory={eventsCategory}
           newEventDescription={newEventDescription}
           setNewEventDescription={setNewEventDescription}

@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { IconSize } from '../Constants/Constants';
 
 import styles from './AddEventPage.module.scss'
 
-function AddEventPage({ 
+
+function AddEventPage({
     onSubmitNewEventData,
     todayDate,
     selectedDate,
@@ -12,13 +14,16 @@ function AddEventPage({
     setNewEventCategory,
     newEventDescription,
     setNewEventDescription,
-    newEventHahdler, addEventError, setIsModalVisible, eventsCategory }) {
-    const [newEventDate, setNewEventDate] = useState(null);
+    newEventHahdler, 
+    addEventError, 
+    setIsModalVisible, 
+    eventsCategory }) {
+
     const [isVisibleCategoryMenu, setIsVisibleCategoryMenu] = useState(false);
-    
+
     const categoryArr = [...Object.values(eventsCategory)]
     return (
-        <div className={styles.modalWrapper}>
+        <div className={styles.modalWrapper } >
             <div className={styles.modalWindow}>
                 <div className={styles.inputBlock}>
                     <div className={styles.title}>
@@ -46,20 +51,20 @@ function AddEventPage({
                             <div className={styles.inputDateBlock}>
                                 <FontAwesomeIcon
                                     icon={faCalendar}
-                                    size={'xl'}
+                                    size={IconSize.XLARGE}
                                     className={styles.faCalendar} />
                                 <input type='date' id='date' name='date'
-                                value={todayDate}
+                                    value={todayDate}
                                     onChange={newEventHahdler} />
                             </div>
                         </div>
                         {addEventError && <div className={styles.message}>{addEventError}</div>}
                         <div>
                             <input
-                            value={newEventDescription}
+                                value={newEventDescription}
                                 onChange={(e) => setNewEventDescription(e.target.value)}
-                                placeholder='Description' 
-                                />
+                                placeholder='Description'
+                            />
                         </div>
                     </div>
                 </div>
@@ -67,10 +72,10 @@ function AddEventPage({
                     <button
                         className={styles.btnCancel}
                         onClick={() => setIsModalVisible(prev => !prev)}>Cancel</button>
-                    <button 
-                    className={styles.btnSave}
-                     onClick={onSubmitNewEventData}
-                     >Save</button>
+                    <button
+                        className={styles.btnSave}
+                        onClick={onSubmitNewEventData}
+                    >Save</button>
                 </div>
             </div>
         </div>
