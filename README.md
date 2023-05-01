@@ -48,9 +48,6 @@ Clone project`s repo:
 git clone https://github.com/OlegMazur/TetaLabTestTask.git
 or download ZIP archive
 
-Root of project
-In the root of the project, you can install all the dependencies with one command:
-
 
 Backend
 In the command line (terminal) go to the folder server:
