@@ -87,3 +87,4 @@ To run the client from the command line (terminal) in the client folder, run:
 npm start
 The app should automatically open in your default browser.
 
+PS. Test login "Oleg" password "123456"
