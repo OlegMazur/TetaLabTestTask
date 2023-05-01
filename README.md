@@ -48,9 +48,7 @@ Clone project`s repo:
 git clone https://github.com/OlegMazur/TetaLabTestTask.git
 or download ZIP archive
 
-Root of project
-In the root of the project, you can install all the dependencies with one command:
-
+Open root folder of the ptoject in your IDE or command line
 
 Backend
 In the command line (terminal) go to the folder server:
@@ -87,3 +85,4 @@ To run the client from the command line (terminal) in the client folder, run:
 npm start
 The app should automatically open in your default browser.
 
+PS. Test login "Oleg" password "123456"
