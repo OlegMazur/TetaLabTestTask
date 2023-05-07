@@ -6,6 +6,7 @@ import moment from 'moment/moment';
 
 import styles from './App.module.scss';
 import { eventsCategory } from './Constants/Constants';
+import { event } from '../service/service';
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -77,10 +78,19 @@ function App() {
       .catch(alert)
   }
 
-  function getEvents() {
-    fetch('http://localhost:5000/api/events/')
-      .then(res => res.json())
-      .then(data => setNewEventData(prev => data))
+ async function getEvents() {
+    try{
+      const resData= await event.getAllEvents();
+      console.log('resData', resData)
+      return resData
+      //setNewEventData(prev => resData)
+    }catch(e){
+    console.log(e)
+    }
+      
+    // fetch('http://localhost:5000/api/events/')
+    //   .then(res => res.json())
+    //   .then(data => setNewEventData(prev => data))
   }
   useEffect(() => {
     if (token) {
@@ -88,7 +98,10 @@ function App() {
     }
   }, [token])
   useEffect(() => {
-    getEvents()
+     getEvents().then(data=>{
+      console.log('data', data);
+      setNewEventData(prev => data)
+     });
   }, [])
   return (
     <div className={styles.App}>
